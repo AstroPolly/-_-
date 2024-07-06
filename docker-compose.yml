@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  flask-api:
+    build:
+      context: ./flask-api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=sqlite:///app.db
+    volumes:
+      - ./flask-api:/app
+    command: flask run --host=0.0.0.0
+  react-app:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./React App:/app
+    command: npm start
